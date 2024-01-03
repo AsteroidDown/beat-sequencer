@@ -4,9 +4,6 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
-    "paths": {
-      "@beat-sequencer/components": ["src/lib/components/src/index.ts"]
-    }
   },
   "files": [
     "src/main.ts"
