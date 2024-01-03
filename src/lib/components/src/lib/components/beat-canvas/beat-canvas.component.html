@@ -1,0 +1,32 @@
+<div class="container" [style.max-height]="boxHeight * 12 + spacing + 'px'">
+  <canvas
+    id="canvas"
+    [style.width]="width + 'px'"
+    [style.height]="height + 'px'"
+    [style.margin-left]="leftPull ? '-' + leftPull + 'px' : ''"
+    (click)="canvasClicked($event)"
+  ></canvas>
+</div>
+
+<control-panel
+  [bpm]="bpm"
+  [bars]="bars"
+  [octaves]="octaves"
+  [playing]="playing"
+  [beats]="beatsPerBar"
+  [divisions]="noteDivisions"
+  (playPressed)="playSong()"
+  (setBars)="setBars($event)"
+  (setBeats)="setBeats($event)"
+  (setBpm)="setNoteLength($event)"
+  (setOctaves)="setOctaves($event)"
+  (setDivisions)="setDivisions($event)"
+  (save)="save()"
+></control-panel>
+
+<!-- <audio
+  *ngFor="let note of allNotes; index as index"
+  type="audio/mpeg"
+  [id]="note"
+  [src]="'assets/' + instrument + '/' + allNotes[index] + '.wav'"
+></audio> -->

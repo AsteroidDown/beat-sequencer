@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="play-button-container">
+    <button class="play-button" (click)="play()"></button>
+  </div>
+
+  <form class="controls" [formGroup]="form">
+    <div class="slider-container">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span> BPM </span>
+
+        <div style="display: flex; gap: 8px">
+          <input
+            min="40"
+            max="240"
+            type="range"
+            class="slider"
+            formControlName="bpm"
+          />
+          <!-- [disabled]="playing" -->
+
+          <span style="align-self: baseline"> {{ form.value.bpm }} </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-container">
+      <div class="input-container">
+        <span> Bars </span>
+
+        <div class="input-box">
+          <div (click)="removeBar()">
+            <span> - </span>
+          </div>
+
+          <input
+            class="number-input"
+            type="number"
+            formControlName="bars"
+            [disabled]="playing"
+          />
+
+          <div (click)="addBar()">
+            <span> + </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <span> Beats per bar </span>
+
+        <div class="input-box">
+          <div (click)="removeBeat()">
+            <span> - </span>
+          </div>
+
+          <input
+            class="number-input"
+            type="number"
+            max="7"
+            min="2"
+            formControlName="beats"
+            [disabled]="playing"
+          />
+
+          <div (click)="addBeat()">
+            <span> + </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <span> Beats split into </span>
+
+        <div class="input-box">
+          <div (click)="removeDivision()">
+            <span> - </span>
+          </div>
+
+          <input
+            class="number-input"
+            type="number"
+            formControlName="divisions"
+            [disabled]="playing"
+          />
+
+          <div (click)="addDivision()">
+            <span> + </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <span> Octaves </span>
+
+        <div class="input-box">
+          <div (click)="removeOctave()">
+            <span> - </span>
+          </div>
+
+          <input
+            class="number-input"
+            type="number"
+            formControlName="octaves"
+            [disabled]="playing"
+          />
+
+          <div (click)="addOctave()">
+            <span> + </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="save" (click)="saveSong()">Save</button>
+  </form>
+</div>
