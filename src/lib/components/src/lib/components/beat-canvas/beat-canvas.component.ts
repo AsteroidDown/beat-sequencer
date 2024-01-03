@@ -345,6 +345,15 @@ export class BeatCanvasComponent implements OnInit {
       this.resize();
     }
 
+    this.allNotes.forEach((note) => {
+      const audio = new Audio(
+        'assets/' + this.instrument + '/' + note + '.wav'
+      );
+      audio.volume = 0;
+      audio.load();
+      audio.play();
+    });
+
     this.load();
   }
 }
