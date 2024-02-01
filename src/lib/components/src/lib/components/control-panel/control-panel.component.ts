@@ -36,6 +36,10 @@ export class ControlPanelComponent {
     this.form.controls['octaves'].valueChanges.subscribe((value) => {
       if (value) this.updateOctaves(value);
     });
+
+    this.form.controls['loop'].valueChanges.subscribe((value) => {
+      if (typeof value === 'boolean') this.updateLoop(value);
+    });
   }
 
   @Input() playing = false;
@@ -55,6 +59,9 @@ export class ControlPanelComponent {
   @Input() set octaves(octaves: number) {
     if (octaves) this.form.patchValue({ octaves });
   }
+  @Input() set loop(loop: boolean) {
+    if (loop) this.form.patchValue({ loop });
+  }
 
   @Output() playPressed = new EventEmitter();
   @Output() stopPressed = new EventEmitter();
@@ -66,6 +73,7 @@ export class ControlPanelComponent {
   @Output() setDivisions = new EventEmitter<number>();
   @Output() setBpm = new EventEmitter<number>();
   @Output() setOctaves = new EventEmitter<number>();
+  @Output() setLoop = new EventEmitter<boolean>();
 
   form = this.formBuilder.group({
     bpm: [120],
@@ -150,6 +158,10 @@ export class ControlPanelComponent {
 
   updateOctaves(octaves: number) {
     this.setOctaves.emit(octaves);
+  }
+
+  updateLoop(loop: boolean) {
+    this.setLoop.emit(loop);
   }
 
   saveSong() {

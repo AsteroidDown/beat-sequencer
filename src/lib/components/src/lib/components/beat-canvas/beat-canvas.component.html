@@ -16,6 +16,7 @@
   [beats]="beatsPerBar"
   [divisions]="noteDivisions"
   (playPressed)="playSong()"
+  (setLoop)="setLoop($event)"
   (setBars)="setBars($event)"
   (setBeats)="setBeats($event)"
   (setBpm)="setNoteLength($event)"

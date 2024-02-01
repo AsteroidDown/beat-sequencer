@@ -38,6 +38,7 @@ export class BeatCanvasComponent implements OnInit {
   minBoxHeight = 48;
 
   leftPull = 0;
+  loop = false;
   playing = false;
   currentBeat: number | null = null;
 
@@ -110,6 +111,10 @@ export class BeatCanvasComponent implements OnInit {
   setNoteLength(bpm: number) {
     const length = (60 / bpm / this.noteDivisions) * 1000;
     this.noteLength = length;
+  }
+
+  setLoop(loop: boolean) {
+    this.loop = loop;
   }
 
   draw() {
@@ -206,9 +211,12 @@ export class BeatCanvasComponent implements OnInit {
   }
 
   playBeat(beat: number) {
+    console.timeEnd('' + (beat - 1));
+    console.time('' + (beat === 64 ? -1 : beat));
+
     setTimeout(
       () => {
-        if (beat <= this.lastBeat) {
+        if (beat < this.beats) {
           this.currentBeat = beat;
 
           for (let note = 0; note < this.notes; note += 1) {
@@ -217,15 +225,21 @@ export class BeatCanvasComponent implements OnInit {
 
           this.playBeat(beat + 1);
         } else {
-          this.currentBeat = null;
-          this.playing = false;
+          this.leftPull = 0;
+
+          if (this.loop) this.playBeat(0);
+          else {
+            this.playing = false;
+            this.currentBeat = null;
+          }
         }
 
         this.draw();
       },
-
-      this.noteLength
-      // beat % 2 ? this.noteLength : this.noteLength + this.noteLength * 0.3
+      beat === this.beats - 1 ? 0 : this.noteLength
+      // beat % 2
+      //   ? this.noteLength - this.noteLength * 0.1
+      //   : this.noteLength + this.noteLength * 0.1
     );
   }
 
